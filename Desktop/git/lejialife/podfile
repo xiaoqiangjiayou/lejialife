@@ -1,0 +1,8 @@
+pod 'AFNetworking' 
+pod 'Masonry'
+pod 'SDWebImage' 
+pod 'FMDB'
+pod 'MBProgressHUD'
+pod 'BaiduMapKit' #百度地图SDK
+pod 'UMengSocialCOM', '~> 5.2.1'
+pod 'UMengAnalytics'

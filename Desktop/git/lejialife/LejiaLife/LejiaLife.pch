@@ -1,0 +1,58 @@
+//
+//  LejiaLife.pch
+//  LejiaLife
+//
+//  Created by 张强 on 16/3/21.
+//  Copyright © 2016年 张强. All rights reserved.
+//
+
+#ifndef LejiaLife_pch
+#define LejiaLife_pch
+#import "NetDataEngin.h"
+#import <UIKit/UIKit.h>
+#import "Netinterface.h"
+#import "JHRefresh.h"
+#import "UIImageView+WebCache.h"
+#import "Masonry.h"
+#import "MBHelper.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocial.h"
+#import <UMMobClick/MobClick.h>
+
+
+
+#define BAIDUAK  @"sBrSreGsNg3DuB8NMm9uw1TrqA55t6QA"
+//屏幕尺寸定义
+#define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREEN_SIZE   [UIScreen mainScreen].bounds.size
+#define SCREEN_RECT   [UIScreen mainScreen].bounds
+
+#define SCREEN_WIDTHSCALE [UIScreen mainScreen].bounds.size.width/375
+#define SCREEN_HEIGHTSCALE [UIScreen mainScreen].bounds.size.height/667
+
+
+
+
+#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
+
+#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
+
+#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入检索功能所有的头文件
+
+#import <BaiduMapAPI_Cloud/BMKCloudSearchComponent.h>//引入云检索功能所有的头文件
+
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+
+#import <BaiduMapAPI_Utils/BMKUtilsComponent.h>//引入计算工具所有的头文件
+
+#import <BaiduMapAPI_Radar/BMKRadarComponent.h>//引入周边雷达功能所有的头文件
+
+#import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* LejiaLife_pch */
