@@ -32,7 +32,7 @@
 //    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
     UMConfigInstance.appKey = YMAPPKEY;
     UMConfigInstance.channelId = @"App Store";
-    //UMConfigInstance.eSType = E_UM_GAME; // 仅适用于游戏场景
+    UMConfigInstance.eSType = E_UM_GAME; // 仅适用于游戏场景
     [MobClick startWithConfigure:UMConfigInstance];
     return YES;
 }
