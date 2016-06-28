@@ -37,7 +37,7 @@
 
 //用户位置
 @property (strong,nonatomic) CLLocation *clloction;
-
+@property(nonatomic,copy)NSDictionary *sendDic;
 //数据
 @property(nonatomic,retain)NSMutableArray *tableViewdataSouceArray;
 @property(nonatomic,retain)NSMutableArray *colllectionViewdataSouceArray;
@@ -76,21 +76,15 @@
     [self startLocation];
     
 }
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+-(void)viewWillAppear:(BOOL)animated{
     [super viewDidLoad];
     [self.view addSubview:self.TableView];
     [self.view addSubview:self.titleView];
     [self creatHeadView];
-    
-}
-
-
--(void)viewDidLoad{
     [self fetchData];
     [self fetchTopic];
+}
+-(void)viewDidLoad{
 }
 -(void)fetchData{
     NSString *longitude=[NSString stringWithFormat:@"%f",self.userLongitude];
@@ -195,7 +189,7 @@
 -(UITableView *)TableView{
     if (_TableView==nil) {
         _TableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-        _TableView.estimatedRowHeight = 2000;
+        //_TableView.estimatedRowHeight = 2000;
         _TableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _TableView.dataSource=self;
         _TableView.delegate=self;
@@ -205,7 +199,7 @@
     return _TableView;
 }
 -(void)creatHeadView{
-    _HeadView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT-273.5+44)];
+    _HeadView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , (SCREEN_HEIGHT-273.5*SCREEN_HEIGHTSCALE+44)*SCREEN_HEIGHTSCALE)];
     _HeadView.backgroundColor=[UIColor groupTableViewBackgroundColor];
     
     [self creatOtherViews];
@@ -216,19 +210,17 @@
     }
     [_HeadView addSubview:self.CollectionView];
     self.TableView.tableHeaderView=_HeadView;
-    
-    
     SetViewController *set=[[SetViewController alloc]init];
     set.ExitUpdateBlock=^{
         [self creatHeadView];
     };
 }
 -(void)creatRandomView1{
-    _imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, self.HeadView.frame.size.height-220)];
+    _imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, self.HeadView.frame.size.height-220*SCREEN_HEIGHTSCALE)];
     _imagV.userInteractionEnabled=YES;
     _imagV.image=[UIImage imageNamed:@"title bgtwo"];
     [_HeadView addSubview:_imagV];
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-100, _imagV.frame.size.height-108, 200, 50)];
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-100, _imagV.frame.size.height-108*SCREEN_HEIGHTSCALE, 200, 50)];
     label.userInteractionEnabled=YES;
     label.layer.cornerRadius=3;
     [label.layer setBorderWidth:1];
@@ -253,22 +245,65 @@
     self.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:LoginV animated:YES];
     self.hidesBottomBarWhenPushed=NO;
-    
-    
+//    [UMSocialData setAppKey:YMAPPKEY];
 //    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
-//    
 //    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-//        
 //        if (response.responseCode == UMSResponseCodeSuccess) {
-//            
 //            NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
 //            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
 //            NSLog(@"\nusername = %@,\n usid = %@,\n token = %@ iconUrl = %@,\n unionId = %@,\n thirdPlatformUserProfile = %@,\n thirdPlatformResponse = %@ \n, message = %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL, snsAccount.unionId, response.thirdPlatformUserProfile, response.thirdPlatformResponse, response.message);
-//            
+//            NSString *openId=[response.thirdPlatformUserProfile objectForKey:@"openid"];
+//            NSString *unionid=[response.thirdPlatformUserProfile objectForKey:@"unionid"];
+//            NSString *country=[response.thirdPlatformUserProfile objectForKey:@"country"];
+//            NSString *nickname=[response.thirdPlatformUserProfile objectForKey:@"nickname"];
+//            NSString *city=[response.thirdPlatformUserProfile objectForKey:@"city"];
+//            NSString *province=[response.thirdPlatformUserProfile objectForKey:@"province"];
+//            NSString *language=[response.thirdPlatformUserProfile objectForKey:@"language"];
+//            NSString *headimgurl=[response.thirdPlatformUserProfile objectForKey:@"headimgurl"];
+//            NSString *sex=[response.thirdPlatformUserProfile objectForKey:@"sex"];
+//            NSString *token=snsAccount.accessToken;
+//            _sendDic=@{@"unionid":unionid,@"openid":openId,@"country":country,@"nickname":nickname,@"city":city,@"province":province,@"language":language,@"headimgurl":headimgurl,@"sex":sex,@"token":token};
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
+//            [self creatRandomView2];
+//            [[NetDataEngin sharedInstance]requestHomeParamter:_sendDic Atpage:nil WithURL:WXLOGIN success:^(id responsData) {
+//                NSDictionary *responsDatadic=responsData;
+//                NSInteger status=[responsDatadic[@"status"] integerValue];
+//                if (status==200) {
+//                    NSLog(@"登录成功");
+//                    //用户数据
+//                    NSMutableDictionary *data=responsData[@"data"];
+//                    NSString *LoginToken=data[@"token"];
+//                    NSString *phoneNumber=data[@"phoneNumber"];
+//                    NSString *userOneBarCode=data[@"userOneBarCode"];
+//                    NSString *scoreA=[NSString stringWithFormat:@"%@",data[@"scoreA"] ];
+//                    NSString *scoreB=[NSString stringWithFormat:@"%@",data[@"scoreB"] ];
+//                    NSString *headImageUrlStr=[NSString stringWithFormat:@"%@",data[@"headImageUrl"]];
+//                    if ([headImageUrlStr isEqual:@"<null>"]) {
+//                        NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"touxiang"]);
+//                        [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"headImageUrl"];
+//                    }else{
+//                        NSString *headImageUrl=data[@"headImageUrl"];
+//                        NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:headImageUrl]];
+//                        [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"headImageUrl"];
+//                    }
+//                    [[NSUserDefaults standardUserDefaults] setObject:LoginToken forKey:@"LoginToken"];
+//                    [[NSUserDefaults standardUserDefaults] setObject:phoneNumber forKey:@"PhoneNumber"];
+//                    ;
+//                    [[NSUserDefaults standardUserDefaults] setObject:userOneBarCode forKey:@"userOneBarCode"];
+//                    [[NSUserDefaults standardUserDefaults] setObject:scoreA forKey:@"scoreA"];
+//                    [[NSUserDefaults standardUserDefaults] setObject:scoreB forKey:@"scoreB"];
+//                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
+//                    [self.TableView reloadData];
+//                }else{
+//                    
+//                    [MBHelper showHUDViewWithTextForFooterView:responsDatadic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
+//                }
+//            } failed:^(NSError *error) {
+//                
+//            }];
 //        }
-//        
 //    });
-    
+
 }
 
 -(void)registBtnClick{
@@ -280,16 +315,16 @@
     self.hidesBottomBarWhenPushed=NO;
 }
 -(void)creatRandomView2{
-    _imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, self.HeadView.frame.size.height-220)];
+    _imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, self.HeadView.frame.size.height-220*SCREEN_HEIGHTSCALE)];
     _imagV.userInteractionEnabled=YES;
     _imagV.image=[UIImage imageNamed:@"title bgtwo"];
     [_HeadView addSubview:_imagV];
     UIButton *btn1=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame=CGRectMake(57, _imagV.frame.size.height-108, 40 , 65) ;
+    btn1.frame=CGRectMake(57, _imagV.frame.size.height-138*SCREEN_HEIGHTSCALE, 40 , 65) ;
     UIImageView *BtnimagV1=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 40, 35)];
     BtnimagV1.image=[UIImage imageNamed:@"payment_icon"];
     [btn1 addSubview:BtnimagV1];
-    UILabel *BtnLabel1=[[UILabel alloc]initWithFrame:CGRectMake(0, 45, 40, 20)];
+    UILabel *BtnLabel1=[[UILabel alloc]initWithFrame:CGRectMake(0, 45*SCREEN_HEIGHTSCALE, 40, 20)];
     BtnLabel1.text=@"付款";
     BtnLabel1.textColor=[UIColor whiteColor];
     BtnLabel1.textAlignment=NSTextAlignmentCenter;
@@ -297,11 +332,11 @@
     [btn1 addTarget:self action:@selector(Paymoney) forControlEvents:UIControlEventTouchUpInside];
     [_imagV addSubview:btn1];
     UIButton *btn2=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame=CGRectMake(SCREEN_WIDTH/2-20, _imagV.frame.size.height-108, 40 , 65) ;
+    btn2.frame=CGRectMake(SCREEN_WIDTH/2-20, _imagV.frame.size.height-138*SCREEN_HEIGHTSCALE, 40 , 65) ;
     UIImageView *BtnimagV2=[[UIImageView alloc]initWithFrame:CGRectMake(5, 0, 30, 35)];
     BtnimagV2.image=[UIImage imageNamed:@"red_icon"];
     [btn2 addSubview:BtnimagV2];
-    UILabel *BtnLabel2=[[UILabel alloc]initWithFrame:CGRectMake(0, 45, 40, 20)];
+    UILabel *BtnLabel2=[[UILabel alloc]initWithFrame:CGRectMake(0, 45*SCREEN_HEIGHTSCALE, 40, 20)];
     BtnLabel2.text=@"红包";
     BtnLabel2.textColor=[UIColor whiteColor];
     BtnLabel2.textAlignment=NSTextAlignmentCenter;
@@ -309,25 +344,25 @@
     [btn2 addTarget:self action:@selector(Redenvelope) forControlEvents:UIControlEventTouchUpInside];
     [_imagV addSubview:btn2];
     UIButton *btn3=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn3.frame=CGRectMake(SCREEN_WIDTH-87, _imagV.frame.size.height-108, 40 , 65) ;
+    btn3.frame=CGRectMake(SCREEN_WIDTH-87, _imagV.frame.size.height-138*SCREEN_HEIGHTSCALE, 40 , 65) ;
     UIImageView *BtnimagV3=[[UIImageView alloc]initWithFrame:CGRectMake(5, 0, 30, 35)];
     BtnimagV3.image=[UIImage imageNamed:@"integral_icon"];
     [btn3 addSubview:BtnimagV3];
-    UILabel *BtnLabel3=[[UILabel alloc]initWithFrame:CGRectMake(0, 45, 40, 20)];
+    UILabel *BtnLabel3=[[UILabel alloc]initWithFrame:CGRectMake(0, 45*SCREEN_HEIGHTSCALE, 40, 20)];
     BtnLabel3.text=@"积分";
     BtnLabel3.textColor=[UIColor whiteColor];
     BtnLabel3.textAlignment=NSTextAlignmentCenter;
     [btn3 addSubview:BtnLabel3];
     [btn3 addTarget:self action:@selector(Integral) forControlEvents:UIControlEventTouchUpInside];
     [_imagV addSubview:btn3];
-    UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, _imagV.frame.size.height-35, 110, 20)];
+    UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, _imagV.frame.size.height-65*SCREEN_HEIGHTSCALE, 110, 20)];
     label4.textAlignment=NSTextAlignmentCenter;
     label4.text=[NSString stringWithFormat:@"￥%.2f",[[[NSUserDefaults standardUserDefaults]objectForKey:@"scoreA"] floatValue]/100];
     label4.font=[UIFont systemFontOfSize:19.0];
     label4.textColor=[UIColor whiteColor];
     [_imagV addSubview:label4];
     
-    UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-122, _imagV.frame.size.height-35, 110, 20)];
+    UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-122, _imagV.frame.size.height-65*SCREEN_HEIGHTSCALE, 110, 20)];
     label5.textAlignment=NSTextAlignmentCenter;
     label5.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"scoreB"];;
     label5.font=[UIFont systemFontOfSize:19.0];
@@ -370,31 +405,31 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"商城_01.png"] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"商城_01.png"]];
     //下部
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-100, self.HeadView.frame.size.height-20.5, 50, 1)];
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-100, self.HeadView.frame.size.height-12.5, 50, 1)];
     label.backgroundColor=[UIColor colorWithRed:209.0/250.0 green:50.0/250.0 blue:53.0/250.0 alpha:1];
     [_HeadView addSubview:label];
-    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2+60, self.HeadView.frame.size.height-20.5, 45, 1)];
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2+60, self.HeadView.frame.size.height-12.5, 45, 1)];
     label2.backgroundColor=[UIColor colorWithRed:209.0/250.0 green:50.0/250.0 blue:53.0/250.0 alpha:1];
     [_HeadView addSubview:label2];
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-16.7, self.HeadView.frame.size.height-28.5, 60, 20)];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-16.7, self.HeadView.frame.size.height-20.5, 60, 20)];
     label3.text=@"离我最近";
     label3.font=[UIFont systemFontOfSize:14.0];
     [_HeadView addSubview:label3];
-    UIImageView *imagV=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-40, self.HeadView.frame.size.height-25.5, 15, 15)];
+    UIImageView *imagV=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-40, self.HeadView.frame.size.height-20.5, 15, 15)];
     imagV.image=[UIImage imageNamed:@"lately_icon"];
     [_HeadView addSubview:imagV];
     //上部
-    UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-100, self.HeadView.frame.size.height-213.5, 50, 1)];
+    UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-100, self.HeadView.frame.size.height-213.5*SCREEN_HEIGHTSCALE, 50, 1)];
     label4.backgroundColor=[UIColor colorWithRed:209.0/250.0 green:50.0/250.0 blue:53.0/250.0 alpha:1];
     [_HeadView addSubview:label4];
-    UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2+60, self.HeadView.frame.size.height-213.5, 45, 1)];
+    UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2+60, self.HeadView.frame.size.height-213.5*SCREEN_HEIGHTSCALE, 45, 1)];
     label5.backgroundColor=[UIColor colorWithRed:209.0/250.0 green:50.0/250.0 blue:53.0/250.0 alpha:1];
     [_HeadView addSubview:label5];
-    UILabel *label6=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-16.7, self.HeadView.frame.size.height-221.5, 60, 20)];
+    UILabel *label6=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-16.7, self.HeadView.frame.size.height-221.5*SCREEN_HEIGHTSCALE, 60, 20)];
     label6.text=@"每日乐选";
     label6.font=[UIFont systemFontOfSize:14.0];
     [_HeadView addSubview:label6];
-    UIImageView *imagV2=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-40, self.HeadView.frame.size.height-221, 15, 15)];
+    UIImageView *imagV2=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-40, self.HeadView.frame.size.height-221*SCREEN_HEIGHTSCALE, 15, 15)];
     imagV2.image=[UIImage imageNamed:@"music-selection_icon"];
     [_HeadView addSubview:imagV2];
 }
@@ -410,7 +445,7 @@
         //设置滚动方向
         flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
         //实例化collection
-        _CollectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, self.HeadView.frame.size.height-39-160, SCREEN_WIDTH, 162*SCREEN_HEIGHTSCALE) collectionViewLayout:flowLayout];
+        _CollectionView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, self.HeadView.frame.size.height-39*SCREEN_HEIGHTSCALE-160*SCREEN_HEIGHTSCALE, SCREEN_WIDTH, 162*SCREEN_HEIGHTSCALE) collectionViewLayout:flowLayout];
         _CollectionView.showsVerticalScrollIndicator=NO;
         //设置collectionView代理
         _CollectionView.delegate=self;
@@ -446,6 +481,7 @@
 {
     
 }
+
 /*--------------------------------------------------tableView代理方法--------------------------------*/
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 150*SCREEN_HEIGHTSCALE;
@@ -465,7 +501,6 @@
     CGRect frame = cell.adressLabel.frame;
     frame.size.height = size.height;
     [cell.adressLabel setFrame:frame];
-    
     cell.accountLabel.text=model.rebate;
     return cell;
 }
@@ -474,6 +509,8 @@
     HomeModel *model=[self.tableViewdataSouceArray objectAtIndex:indexPath.row];
     self.hidesBottomBarWhenPushed=YES;
     mechant.detailId=model.iid;
+    mechant.latitude=_userLatitude;
+    mechant.longitude=_userLongitude;
     [self.navigationController pushViewController:mechant animated:YES];
     self.hidesBottomBarWhenPushed=NO;
 }

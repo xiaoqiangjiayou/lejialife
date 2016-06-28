@@ -32,8 +32,9 @@
     lineLabel.backgroundColor=[UIColor groupTableViewBackgroundColor];
     [TitleVIew addSubview:lineLabel];
     [self.view addSubview:TitleVIew];
-    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(20, 30, 12, 20)];
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 74)];
+    [returnBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [returnBtn setImageEdgeInsets:UIEdgeInsetsMake(15, -30, 5, 15)];
     [returnBtn addTarget:self action:@selector(Btnreturn) forControlEvents:UIControlEventTouchUpInside];
     [TitleVIew addSubview:returnBtn];
     UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-50, 30, 100, 20)];

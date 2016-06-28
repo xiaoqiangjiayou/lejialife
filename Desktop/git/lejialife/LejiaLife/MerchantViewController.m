@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor=[UIColor whiteColor];
     [self creatTitleViews];
     [self.view addSubview:self.tableView];
     [self fetch];
@@ -34,8 +35,10 @@
     [TitleVIew addSubview:lineLabel];
     TitleVIew.backgroundColor=[UIColor groupTableViewBackgroundColor];;
     [self.view addSubview:TitleVIew];
-    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(10, 20, 50, 44)];
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 64)];
+    [returnBtn setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+    [returnBtn setImageEdgeInsets:UIEdgeInsetsMake(15, 20, 5, 15)];
+    //[returnBtn setBackgroundImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
     [returnBtn addTarget:self action:@selector(Btnreturn) forControlEvents:UIControlEventTouchUpInside];
     [TitleVIew addSubview:returnBtn];
     UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-50, 30, 100, 20)];
@@ -55,7 +58,7 @@
         self.dataSouceArray=[MerchantModel parseResponsData:responsData];
         [self.tableView reloadData];
         [self creatTableHeadView];
-        [self creatTableFootView];
+        //[self creatTableFootView];
     } failed:^(NSError *error) {
         
     }];
@@ -80,16 +83,17 @@
     _headScrollowView.backgroundColor=[UIColor grayColor];
     _headScrollowView.pagingEnabled = YES;
     _headScrollowView.delegate=self;
-    _headScrollowView.contentSize=CGSizeMake(SCREEN_WIDTH*model.pictureArray.count, 0);
-    for (int i; i<model.pictureArray.count; i++) {
-        UIImageView *imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH+SCREEN_WIDTH*i, 250*SCREEN_HEIGHTSCALE)];
-        [imagV sd_setImageWithURL:[NSURL URLWithString:[model.pictureArray objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"placeholder2.jpg"]];
+    _headScrollowView.contentSize=CGSizeMake(SCREEN_WIDTH*3, 0);
+    for (int i=0; i<3; i++) {
+        UIImageView *imagV=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*i, 0, SCREEN_WIDTH, 250*SCREEN_HEIGHTSCALE)];
+//        [imagV sd_setImageWithURL:[NSURL URLWithString:[model.pictureArray objectAtIndex:i]] placeholderImage:[UIImage imageNamed:@"placeholder2.jpg"]];
+        imagV.image=[UIImage imageNamed:@"placeholder2.jpg"];
         [_headScrollowView addSubview:imagV];
     }
     _pageControl=[[UIPageControl alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-100, 200, 200, 20)];
     _pageControl.pageIndicatorTintColor = [UIColor groupTableViewBackgroundColor];
     _pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    _pageControl.numberOfPages=model.pictureArray.count;
+    _pageControl.numberOfPages=3;
     [headView addSubview:_headScrollowView];
     [headView addSubview:_pageControl];
     UILabel *nameLabel=[[UILabel alloc]initWithFrame:CGRectMake(20,  270*SCREEN_HEIGHTSCALE, SCREEN_WIDTH-40, 15)];
@@ -108,14 +112,17 @@
     self.tableView.tableHeaderView=headView;
     
 }
--(void)creatTableFootView{
-    MerchantModel *model=[self.dataSouceArray objectAtIndex:0];
-    UIView *footVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT- 332*SCREEN_HEIGHTSCALE-44*3)];
-    UIImageView *imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT- 332*SCREEN_HEIGHTSCALE-44*3)];
-    [imagV sd_setImageWithURL:[NSURL URLWithString:model.picture] placeholderImage:[UIImage imageNamed:@"placeholder2.jpg"]];
-    [footVIew addSubview:imagV];
-    self.tableView.tableFooterView=footVIew;
-}
+//-(void)creatTableFootView{
+//    MerchantModel *model=[self.dataSouceArray objectAtIndex:0];
+//    UIView *footVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT- 332*SCREEN_HEIGHTSCALE-44*3)];
+//    UIImageView *imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT- 332*SCREEN_HEIGHTSCALE-44*3)];
+//    if (model.picture ==NULL) {
+//    }else{
+//    [imagV sd_setImageWithURL:[NSURL URLWithString:model.picture] placeholderImage:[UIImage imageNamed:@"placeholder2.jpg"]];
+//    }
+//    [footVIew addSubview:imagV];
+//    self.tableView.tableFooterView=footVIew;
+//}
 
 //tableVIew代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -147,21 +154,78 @@
     return cell;
 }
 -(void)imageBtnClick:(UIButton *)sender{
+//    MerchantModel *model=[self.dataSouceArray objectAtIndex:0];
+//    if (sender.tag==100) {
+//        NSString *stringURL=[NSString stringWithFormat:@"mapbarnaviiap:"];
+//        NSURL *url=[NSURL URLWithString:stringURL];
+//        if ([[UIApplication sharedApplication]canOpenURL:url]) {
+//            [[UIApplication sharedApplication]openURL:url];
+//        }else{
+//            UIAlertView *alart=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您尚未安装百度地图，请前往appStore安装" delegate:self cancelButtonTitle:nil otherButtonTitles:@"立即安装",@"稍后安装" ,nil];
+//            [alart show];
+//        }
+//        
+//        
+//        
+//        
+//    }else if (sender.tag==101){
+//        UIWebView*callWebview =[[UIWebView alloc] init];
+//        NSURL *telURL =[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",model.phoneNumber]];// 貌似tel:// 或者 tel: 都行
+//        [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+//        //记得添加到view上
+//        [self.view addSubview:callWebview];
+//    }else{
+//    
+//    }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MerchantModel *model=[self.dataSouceArray objectAtIndex:0];
-    if (sender.tag==100) {
-        
-    }else if (sender.tag==101){
+    if (indexPath.row==0) {
+        //判断手机上是否存在chenshtwo的应用
+        BOOL blCanOpenUrl = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]];
+        if (blCanOpenUrl) {
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"baidumap://"]];
+            BMKOpenTransitRouteOption *opt = [[BMKOpenTransitRouteOption alloc] init];
+            opt.appScheme = @"baidumapsdk://mapsdk.baidu.com";//用于调起成功后，返回原应用
+            //opt.appScheme=@"baidumapsdk://sBrSreGsNg3DuB8NMm9uw1TrqA55t6QA";
+            //初始化起点节点
+            BMKPlanNode* start = [[BMKPlanNode alloc]init];
+            //指定起点经纬度
+            CLLocationCoordinate2D coor1;
+            coor1.latitude = _latitude;
+            coor1.longitude = _longitude;
+            //指定起点名称
+            //start.name = @"";
+            start.pt = coor1;
+            //指定起点
+            opt.startPoint = start;
+            //初始化终点节点
+            BMKPlanNode* end = [[BMKPlanNode alloc]init];
+            CLLocationCoordinate2D coor2;
+            coor2.latitude = [model.lat doubleValue];
+            coor2.longitude = [model.lng doubleValue];
+            end.pt = coor2;
+            //指定终点名称
+            //end.name = @"";
+            opt.endPoint = end;
+            //打开地图公交路线检索
+            BMKOpenErrorCode code = [BMKOpenRoute openBaiduMapTransitRoute:opt];
+        }else{
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未安装百度地图，请前往appStore安装" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            [alertController addAction:cancelAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }else if (indexPath.row==1){
         UIWebView*callWebview =[[UIWebView alloc] init];
         NSURL *telURL =[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",model.phoneNumber]];// 貌似tel:// 或者 tel: 都行
         [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
         //记得添加到view上
         [self.view addSubview:callWebview];
     }else{
-    
+        
     }
 }
-
-
 #pragma Mark -scrollow代理方法-
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     if (scrollView==self.headScrollowView) {

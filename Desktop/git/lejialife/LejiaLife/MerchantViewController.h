@@ -10,4 +10,9 @@
 
 @interface MerchantViewController : UIViewController
 @property(nonatomic,copy)NSString *detailId;
+
+
+
+@property(nonatomic)double latitude;
+@property(nonatomic)double longitude;
 @end

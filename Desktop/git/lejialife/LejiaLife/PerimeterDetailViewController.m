@@ -111,15 +111,29 @@
     titleBtn.titleLabel.textAlignment=NSTextAlignmentCenter;
     [titleBtn setTitleColor:[UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1] forState:UIControlStateNormal];
     [titleBtn setImage:[UIImage imageNamed:@"downward-triangle_city"] forState:UIControlStateNormal];
-    [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 80, 0, 0)];
+    [titleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 95, 0, 0)];
     [TitleVIew addSubview:titleBtn];
     self.styleBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH/2, 44)];
+    if ([self.popStyleId isEqualToString:@"1"]) {
+       [self.styleBtn setTitle:@"美食" forState:UIControlStateNormal];
+    }else if ([self.popStyleId isEqualToString:@"2"]){
+    [self.styleBtn setTitle:@"KTV" forState:UIControlStateNormal];
+    }else if ([self.popStyleId isEqualToString:@"3"]){
+    [self.styleBtn setTitle:@"温泉" forState:UIControlStateNormal];
+    }else if ([self.popStyleId isEqualToString:@"4"]){
+    [self.styleBtn setTitle:@"旅游" forState:UIControlStateNormal];
+    }else if ([self.popStyleId isEqualToString:@"5"]){
+    [self.styleBtn setTitle:@"健身" forState:UIControlStateNormal];
+    }else if ([self.popStyleId isEqualToString:@"6"]){
+    [self.styleBtn setTitle:@"购物" forState:UIControlStateNormal];
+    }else{
     [self.styleBtn setTitle:@"全部类型" forState:UIControlStateNormal];
+    }
     [self.styleBtn setTitleColor:[UIColor grayColor]forState:UIControlStateNormal];
     self.styleBtn.titleLabel.font=[UIFont systemFontOfSize:17];
     [self.styleBtn addTarget:self action:@selector(styleBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.styleBtn setImage:[UIImage imageNamed:@"drop-triangle"] forState:UIControlStateNormal];
-    [self.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 135, 0, -10)];
+    [self.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 95, 0, -10)];
     self.styleBtn.selected=NO;
     [TitleVIew addSubview:self.styleBtn];
     self.nearBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2, 64, SCREEN_WIDTH/2, 44)];
@@ -150,19 +164,19 @@
     self.popover.didShowHandler = ^() {
         NSLog(@"Did show");
         [weakself.styleBtn setImage:[UIImage imageNamed:@"upward-triangle"] forState:UIControlStateNormal];
-        [weakself.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 135, 0, -10)];
+        [weakself.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 95, 0, -10)];
     };
     self.popover.didDismissHandler = ^() {
         NSLog(@"Did dismiss");
         [weakself.styleBtn setImage:[UIImage imageNamed:@"downward-triangle"] forState:UIControlStateNormal];
-        [weakself.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 135, 0, -10)];
+        [weakself.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 95, 0, -10)];
     };
     [self.popover showAtView:self.styleBtn];
 }
 
 -(void)nearBtnClick{
     [self.styleBtn setImage:[UIImage imageNamed:@"drop-triangle"] forState:UIControlStateNormal];
-    [self.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 135, 0, -10)];
+    [self.styleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 95, 0, -10)];
     [self.styleBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.nearBtn setTitleColor:[UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1] forState:UIControlStateNormal];
     _contentView2= [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300-60, 150)];
@@ -238,7 +252,7 @@
         [cell setBackgroundView:label];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=[_styleDataouceArray objectAtIndex:indexPath.row];
-        label.textColor=[UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1];
+        label.textColor=[UIColor grayColor];
         return cell;
     }else{
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"bbb"];
@@ -249,7 +263,7 @@
         [cell setBackgroundView:label];
         label.textAlignment=NSTextAlignmentCenter;
         label.text=[_nearDataouceArray objectAtIndex:indexPath.row];
-        label.textColor=[UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1];
+        label.textColor=[UIColor grayColor];
         return cell;
     }
     

@@ -25,6 +25,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     [self creatTitleView];
     [self creatViews];
+    [self receiveCheckNumButton];
 }
 //导航栏视图
 -(void)creatTitleView{
@@ -32,8 +33,9 @@
     UIView *TitleVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
     TitleVIew.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:TitleVIew];
-    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(20, 30, 12, 20)];
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 74)];
+    [returnBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [returnBtn setImageEdgeInsets:UIEdgeInsetsMake(15, -30, 5, 15)];
     [returnBtn addTarget:self action:@selector(Btnreturn) forControlEvents:UIControlEventTouchUpInside];
     [TitleVIew addSubview:returnBtn];
     UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-50, 30, 100, 20)];
@@ -51,8 +53,14 @@
     [closeBtn addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)close{
-    LoginViewController *login=[[LoginViewController alloc]init];
-    [self.navigationController pushViewController:login animated:YES];
+//    LoginViewController *login=[[LoginViewController alloc]init];
+//    [self.navigationController po];
+//    for (UINavigationController *nav in self.navigationController.viewControllers) {
+//        if ([nav isKindOfClass:[LoginViewController class]]) {
+//            [self.navigationController popToViewController:nav animated:YES];
+//        }
+//    }
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)Btnreturn{
     [self.navigationController popViewControllerAnimated:YES];
@@ -65,7 +73,7 @@
     [self.view addSubview:label];
     _textField=[[UITextField alloc]initWithFrame:CGRectMake(20, 134, SCREEN_WIDTH/2, 50)];
     _textField.placeholder=@"请输入验证码";
-    _textField.textAlignment=NSTextAlignmentCenter;
+    _textField.textAlignment=NSTextAlignmentLeft;
     _textField.layer.cornerRadius=5;
     [_textField.layer setBorderWidth:1.5];
     [_textField.layer setBorderColor:[UIColor groupTableViewBackgroundColor].CGColor];
@@ -75,21 +83,27 @@
     _textField.keyboardType=UIKeyboardTypePhonePad;
     _textField.delegate=self;
     [self.view addSubview:_textField];
-    _repeatBtn=[[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/2+50, 131, SCREEN_WIDTH/2-50, 50)];
-    [_repeatBtn addTarget:self action:@selector(repeatClick:) forControlEvents:UIControlEventTouchUpInside];
+    //倒计时button
+    _repeatBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/2+50, 131, SCREEN_WIDTH/2-50-20, 50)];
+    
+    _repeatBtn.backgroundColor = [UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1];
+    
+    [_repeatBtn setTitle:@"获取验证码"forState:UIControlStateNormal];
+    
+    [_repeatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    _repeatBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    
+    _repeatBtn.layer.cornerRadius =5;
+    
+    _repeatBtn.layer.masksToBounds =YES;
+    
+    _repeatBtn.alpha =0.3;
+    
+    [_repeatBtn addTarget:self action:@selector(receiveCheckNumButton)forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:_repeatBtn];
-    _repeatBtn.titleLabel.font=[UIFont systemFontOfSize:16];
-    [_repeatBtn setTitleColor:[UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1] forState:UIControlStateNormal];
-    [_repeatBtn setTitle:@"重新获取" forState:UIControlStateNormal];
-    _timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/2+50, 131, SCREEN_WIDTH/2-50, 50)];
-    _timeLabel.font=[UIFont systemFontOfSize:16];
-    self.timeStr=@"60";
-    NSString *str=[NSString stringWithFormat:@"%@s后重新获取",self.timeStr];
-    NSMutableAttributedString *str1=[[NSMutableAttributedString alloc]initWithString:str];
-    [str1 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1] range:NSMakeRange(0,3)];
-    _timeLabel.attributedText=str1;
-    [_repeatBtn addSubview:_timeLabel];
-
+    
     UIButton *commitBtn=[[UIButton alloc]initWithFrame:CGRectMake(20, 224, SCREEN_WIDTH-40, 50)];
     commitBtn.backgroundColor=[UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1];
     commitBtn.layer.cornerRadius=5;
@@ -97,22 +111,66 @@
     [commitBtn addTarget:self action:@selector(commitBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:commitBtn];
 }
-
-
-
--(void)timeFireMethod{
-    //倒计时-1
-    _secondsCountDown--;
-    //修改倒计时标签现实内容
-    _timeLabel.text=[NSString stringWithFormat:@"%d",_secondsCountDown];
-    //当倒计时到0时，做需要的操作，比如验证码过期不能提交
-    if(_secondsCountDown==0){
-        [_countDownTimer invalidate];
-        [_timeLabel removeFromSuperview];
-    }
-}
--(void)repeatClick:(UIButton*)sender{
-
+- (void)receiveCheckNumButton{
+    
+    __block int timeout=60;//倒计时时间
+    
+    dispatch_queue_t queue =dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,0, 0,queue);
+    
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL,0),1.0*NSEC_PER_SEC,0); //每秒执行
+    
+    dispatch_source_set_event_handler(_timer, ^{
+        
+        if(timeout<=0){//倒计时结束，关闭
+            
+            dispatch_source_cancel(_timer);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //设置界面的按钮显示根据自己需求设置
+                
+                [_repeatBtn setTitle:@"重新获取"forState:UIControlStateNormal];
+                
+                _repeatBtn.userInteractionEnabled =YES;
+                
+                _repeatBtn.backgroundColor = [UIColor colorWithRed:214.0/250.0 green:44.0/250.0 blue:44.0/250.0 alpha:1];
+                
+            });
+            
+        }else{
+            
+            int seconds = timeout;
+            
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //让按钮变为不可点击的灰色
+                
+                _repeatBtn.backgroundColor = [UIColor grayColor];
+                
+                _repeatBtn.userInteractionEnabled =NO;
+                
+                //设置界面的按钮显示根据自己需求设置
+                
+                [UIView beginAnimations:nil context:nil];
+                
+                [UIView setAnimationDuration:1];
+                
+                [_repeatBtn setTitle:[NSString stringWithFormat:@"%@秒后重新获取",strTime]forState:UIControlStateNormal];
+                
+                [UIView commitAnimations];
+                
+            });
+            
+            timeout--;
+            
+        }
+        
+    });
+    dispatch_resume(_timer);
 }
 -(void)commitBtnClick{
     if (self.textField.text.length==6) {
@@ -124,7 +182,9 @@
                 LoginPassWordViewController *passWord=[[LoginPassWordViewController alloc]init];
                 passWord.titleStr=self.titleStr;
                 passWord.phoneNumber=self.phoneNumber;
+                self.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:passWord animated:YES];
+                self.hidesBottomBarWhenPushed=NO;
             }else {
                [MBHelper showHUDViewWithTextForFooterView:dic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
             }

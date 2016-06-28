@@ -29,8 +29,9 @@
     UIView *TitleVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
     TitleVIew.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:TitleVIew];
-    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(20, 30, 12, 20)];
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 74)];
+    [returnBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [returnBtn setImageEdgeInsets:UIEdgeInsetsMake(15, -30, 5, 15)];
     [returnBtn addTarget:self action:@selector(Btnreturn) forControlEvents:UIControlEventTouchUpInside];
     [TitleVIew addSubview:returnBtn];
     UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-50, 30, 100, 20)];
@@ -52,9 +53,10 @@
 
 }
 -(void)close{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    LoginViewController *login=[[LoginViewController alloc]init];
-    [self.navigationController pushViewController:login animated:YES];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    LoginViewController *login=[[LoginViewController alloc]init];
+//    [self.navigationController pushViewController:login animated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)creatViews{
@@ -65,7 +67,7 @@
     [_phoneNumberTextField.layer setBorderColor:[UIColor groupTableViewBackgroundColor].CGColor];
     _phoneNumberTextField.font=[UIFont systemFontOfSize:16];
     _phoneNumberTextField.placeholder=@"请输入您的手机号码";
-    _phoneNumberTextField.textAlignment=NSTextAlignmentCenter;
+    _phoneNumberTextField.textAlignment=NSTextAlignmentLeft;
     //设置开始编辑时候，提供清空按钮
     _phoneNumberTextField.clearsOnBeginEditing=YES;
     _phoneNumberTextField.clearButtonMode=UITextFieldViewModeWhileEditing;
@@ -92,7 +94,9 @@
                 verification.titleStr=self.titleStr;
                 verification.typeId=self.typeId;
                 verification.phoneNumber=self.phoneNumberTextField.text;
+                self.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:verification animated:YES];
+                self.hidesBottomBarWhenPushed=NO;
             }else {
                 [MBHelper showHUDViewWithTextForFooterView:dic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
             }

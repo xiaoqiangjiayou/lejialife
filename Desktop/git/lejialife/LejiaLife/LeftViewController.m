@@ -64,8 +64,8 @@
 -(void)creatViews{
     UIImage *image=[UIImage imageNamed:@"side background(1)"];
     self.view.backgroundColor= [UIColor colorWithPatternImage:image];
-    self.buttomLabel=[[UILabel alloc]initWithFrame:CGRectMake(60, SCREEN_HEIGHT-45, 150, 20)];
-    self.buttomLabel.text=@"客服电话：18510004934";
+    self.buttomLabel=[[UILabel alloc]initWithFrame:CGRectMake(60, SCREEN_HEIGHT-45, 250, 20)];
+    self.buttomLabel.text=@"客服电话：17839980365";
     self.buttomLabel.textColor=[UIColor colorWithRed:140.0/250.0 green:140.0/250.0 blue:140.0/250.0 alpha:1];
     self.buttomLabel.font=[UIFont systemFontOfSize:14];
     [self.view addSubview:self.buttomLabel];

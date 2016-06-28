@@ -208,9 +208,9 @@
         _titleView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
         UIImageView *imagV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         imagV.image=[UIImage imageNamed:@"title background"];
-        UIButton *btn= [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame= CGRectMake(10, 20, 50, 44);
-        [btn setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 74)];
+        [btn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(15, -20, 5, 15)];
         [btn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
         [_titleView addSubview:imagV];
         [_titleView addSubview:btn];
@@ -434,7 +434,7 @@
                 [self chooseclick:_manybtn];
             }else{
                 if (model.btnSelecd==NO) {
-                    [MBHelper showHUDViewWithTextForFooterView:@"请选择规格数量"withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
+//                    [MBHelper showHUDViewWithTextForFooterView:@"请选择规格数量"withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
                 }else{
                     [_chooseView removeFromSuperview];
                     NSString *productSpecId=[[NSString alloc]init];
@@ -455,7 +455,7 @@
                             [MBHelper showHUDViewWithTextForFooterView:responsDatadic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
                             [self.navigationController pushViewController:go animated:YES];
                         }else{
-                            [MBHelper showHUDViewWithTextForFooterView:responsDatadic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
+//                            [MBHelper showHUDViewWithTextForFooterView:responsDatadic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
                         }
                     } failed:^(NSError *error) {
                         NSLog(@"生成订单失败");
@@ -493,7 +493,7 @@
                 [self chooseclick:_manybtn];
             }else{
                 if (model.btnSelecd==NO) {
-                    [MBHelper showHUDViewWithTextForFooterView:@"请选择规格数量"withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
+//                    [MBHelper showHUDViewWithTextForFooterView:@"请选择规格数量"withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
                 }else{
                     GoodsModel *good=[[GoodsModel alloc]init];
                     DBManager *manager=[[DBManager alloc]init];

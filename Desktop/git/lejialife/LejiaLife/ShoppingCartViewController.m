@@ -62,8 +62,9 @@
     [TitleVIew addSubview:lineLabel];
     TitleVIew.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:TitleVIew];
-    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(20, 30, 12, 20)];
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 74)];
+    [returnBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [returnBtn setImageEdgeInsets:UIEdgeInsetsMake(15, -30, 5, 15)];
     [returnBtn addTarget:self action:@selector(Btnreturn) forControlEvents:UIControlEventTouchUpInside];
     [TitleVIew addSubview:returnBtn];
     UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-50, 30, 100, 20)];
@@ -92,35 +93,39 @@
 }
 //删除或者编辑
 -(void)edit{
-    //数组排序
-    int i,j,t;
-    for ( i=0; i<_rememberArray.count-1; i++) {
-        for ( j=i+1; j<_rememberArray.count; j++) {
-            if([_rememberArray[i] intValue]>[_rememberArray[j] intValue]) {
-                
-                t=[_rememberArray[i] intValue];
-                
-                _rememberArray[i]=_rememberArray[j];
-                
-                _rememberArray[j]=[NSString stringWithFormat:@"%d",t ];
-        }
-    }
-    }
-    for (int i=0; i<self.rememberArray.count; i++) {
-        int a=[[_rememberArray objectAtIndex:i] intValue];
+    if (_rememberArray.count==0) {
         
-        NSLog(@"eeeeeeeeeeeeeeeeeeeeee%@",self.rememberArray);
-        DBManager *manager=[DBManager manager];
-        NSLog(@"rrrrrrrrrrrrrrrrrrrrrr%@",[manager readAllGoods]);
-        GoodsModel *delMode =[[manager readAllGoods] objectAtIndex:a-i];
-        [manager deleteGoods:delMode];
-        [self.datasouceArray removeObjectAtIndex:a-i];
-        NSLog(@"hhhhhhhhhhhh%@",[manager readAllGoods]);
+    }else{
+        //数组排序
+        int i,j,t;
+        for ( i=0; i<_rememberArray.count-1; i++) {
+            for ( j=i+1; j<_rememberArray.count; j++) {
+                if([_rememberArray[i] intValue]>[_rememberArray[j] intValue]) {
+                    
+                    t=[_rememberArray[i] intValue];
+                    
+                    _rememberArray[i]=_rememberArray[j];
+                    
+                    _rememberArray[j]=[NSString stringWithFormat:@"%d",t ];
+                }
+            }
+        }
+        for (int i=0; i<self.rememberArray.count; i++) {
+            int a=[[_rememberArray objectAtIndex:i] intValue];
+            
+            NSLog(@"eeeeeeeeeeeeeeeeeeeeee%@",self.rememberArray);
+            DBManager *manager=[DBManager manager];
+            NSLog(@"rrrrrrrrrrrrrrrrrrrrrr%@",[manager readAllGoods]);
+            GoodsModel *delMode =[[manager readAllGoods] objectAtIndex:a-i];
+            [manager deleteGoods:delMode];
+            [self.datasouceArray removeObjectAtIndex:a-i];
+            NSLog(@"hhhhhhhhhhhh%@",[manager readAllGoods]);
+        }
+        
+        self.totalPrice = @"0";
+        self.totalPriceLabel.text = [NSString stringWithFormat:@"合计：￥%.2f", 0.00];
+        [self.tableView reloadData];
     }
-    
-    self.totalPrice = @"0";
-    self.totalPriceLabel.text = [NSString stringWithFormat:@"合计：￥%.2f", 0.00];
-    [self.tableView reloadData];
 }
 //底部视图
 -(void)creatButtomViews{
@@ -159,7 +164,7 @@
 }
 //全选
 -(void)btnClick:(UIButton*)sender{
-    if (!sender.selected==YES) {
+    if (sender.selected!=YES) {
         sender.selected = YES;
         for (int i; i<self.datasouceArray.count; i++) {
             self.datasouceArray[i].modelRememberFlag=YES;

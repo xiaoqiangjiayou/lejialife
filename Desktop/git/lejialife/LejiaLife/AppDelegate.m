@@ -29,23 +29,24 @@
     [WXApi registerApp:WXAPPID withDescription:@"乐+生活"];
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:WXAPPID appSecret:WXSECRECT url:@"http://www.umeng.com/social"];
-//    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
+    [[UMSocialDataService defaultDataService] requestUnOauthWithType:UMShareToWechatSession  completion:^(UMSocialResponseEntity *response){
+        NSLog(@"response is %@",response);
+    }];
+    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
     UMConfigInstance.appKey = YMAPPKEY;
     UMConfigInstance.channelId = @"App Store";
-    UMConfigInstance.eSType = E_UM_GAME; // 仅适用于游戏场景
+    //UMConfigInstance.eSType = E_UM_GAME; // 仅适用于游戏场景
     [MobClick startWithConfigure:UMConfigInstance];
     return YES;
 }
-
-
-
-
-
-
-
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return  [UMSocialSnsService handleOpenURL:url];
+}
 //微信代理
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    return  [UMSocialSnsService handleOpenURL:url];
     return  [WXApi handleOpenURL:url delegate:self];
 }
 -(void) onResp:(BaseResp*)resp
@@ -75,6 +76,7 @@
         }
     }
 }
+
 - (void)creatRootVC {
     if (self.window.rootViewController)
     {
@@ -125,7 +127,8 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //登录需要编写
+    [UMSocialSnsService applicationDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -28,8 +28,9 @@
     UIView *TitleVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
     TitleVIew.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:TitleVIew];
-    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(20, 30, 12, 20)];
-    [returnBtn setBackgroundImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    UIButton *returnBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 74)];
+    [returnBtn setImage:[UIImage imageNamed:@"return_icon"] forState:UIControlStateNormal];
+    [returnBtn setImageEdgeInsets:UIEdgeInsetsMake(15, -30, 5, 15)];
     [returnBtn addTarget:self action:@selector(Btnreturn) forControlEvents:UIControlEventTouchUpInside];
     [TitleVIew addSubview:returnBtn];
     UILabel *titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-50, 30, 100, 20)];
@@ -92,7 +93,9 @@
             NSInteger status=[dic[@"status"] integerValue];
             if (status==200) {
                 LoginViewController *LoginV=[[LoginViewController alloc]init];
+                self.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:LoginV animated:YES];
+                self.hidesBottomBarWhenPushed=NO;
             }else{
                 [MBHelper showHUDViewWithTextForFooterView:dic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
             }

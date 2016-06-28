@@ -13,7 +13,6 @@
 		F008D5FA1C9F92F800ADB5BE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F008D5F91C9F92F800ADB5BE /* ViewController.m */; };
 		F008D5FD1C9F92F800ADB5BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F008D5FB1C9F92F800ADB5BE /* Main.storyboard */; };
 		F008D5FF1C9F92F800ADB5BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F008D5FE1C9F92F800ADB5BE /* Assets.xcassets */; };
-		F008D6021C9F92F800ADB5BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F008D6001C9F92F800ADB5BE /* LaunchScreen.storyboard */; };
 		F008D60B1C9F951C00ADB5BE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F008D60A1C9F951C00ADB5BE /* HomeViewController.m */; };
 		F008D6241C9F9F1B00ADB5BE /* NetDataEngin.m in Sources */ = {isa = PBXBuildFile; fileRef = F008D6231C9F9F1B00ADB5BE /* NetDataEngin.m */; };
 		F008D6271C9FA73D00ADB5BE /* LejiaLifeTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F008D6261C9FA73D00ADB5BE /* LejiaLifeTabbarViewController.m */; };
@@ -277,6 +276,9 @@
 		F0C48C371CB4E1B600AC9247 /* SnacksDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F0C48C361CB4E1B600AC9247 /* SnacksDetailModel.m */; };
 		F0E4BADC1CF2A58400F0B26E /* placeholder1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0E4BADA1CF2A58400F0B26E /* placeholder1.jpg */; };
 		F0E4BADD1CF2A58400F0B26E /* placeholder2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0E4BADB1CF2A58400F0B26E /* placeholder2.jpg */; };
+		F0F72EE41D1D091B0025A918 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0F72EE31D1D091B0025A918 /* Images.xcassets */; };
+		F0F72EE61D1D0B880025A918 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F72EE51D1D0B880025A918 /* LaunchScreen.storyboard */; };
+		F0F72EEA1D1D11BD0025A918 /* Launchimage.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F72EE91D1D11BD0025A918 /* Launchimage.png */; };
 		F0F8AAA31D07FB940084BE96 /* delicious food.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F8AA931D07FB940084BE96 /* delicious food.png */; };
 		F0F8AAA41D07FB940084BE96 /* downward triangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F8AA941D07FB940084BE96 /* downward triangle@2x.png */; };
 		F0F8AAA51D07FB940084BE96 /* downward-triangle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F8AA951D07FB940084BE96 /* downward-triangle@3x.png */; };
@@ -309,7 +311,6 @@
 		F008D5F91C9F92F800ADB5BE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F008D5FC1C9F92F800ADB5BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F008D5FE1C9F92F800ADB5BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F008D6011C9F92F800ADB5BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F008D6031C9F92F800ADB5BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F008D6091C9F951C00ADB5BE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Home/Controllers/HomeViewController.h; sourceTree = SOURCE_ROOT; };
 		F008D60A1C9F951C00ADB5BE /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Home/Controllers/HomeViewController.m; sourceTree = SOURCE_ROOT; };
@@ -692,6 +693,9 @@
 		F0C48C361CB4E1B600AC9247 /* SnacksDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SnacksDetailModel.m; path = Store/snacks/Model/SnacksDetailModel.m; sourceTree = SOURCE_ROOT; };
 		F0E4BADA1CF2A58400F0B26E /* placeholder1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder1.jpg; sourceTree = "<group>"; };
 		F0E4BADB1CF2A58400F0B26E /* placeholder2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder2.jpg; sourceTree = "<group>"; };
+		F0F72EE31D1D091B0025A918 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F0F72EE51D1D0B880025A918 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F0F72EE91D1D11BD0025A918 /* Launchimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Launchimage.png; sourceTree = "<group>"; };
 		F0F8AA931D07FB940084BE96 /* delicious food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delicious food.png"; sourceTree = "<group>"; };
 		F0F8AA941D07FB940084BE96 /* downward triangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downward triangle@2x.png"; sourceTree = "<group>"; };
 		F0F8AA951D07FB940084BE96 /* downward-triangle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downward-triangle@3x.png"; sourceTree = "<group>"; };
@@ -771,6 +775,8 @@
 		F008D5F11C9F92F800ADB5BE /* LejiaLife */ = {
 			isa = PBXGroup;
 			children = (
+				F0C48BD01CABCEA300AC9247 /* Goshopping */,
+				F045C4761CC0F1C0004E7B21 /* SQLate */,
 				F03648E71D06B2A800E224CE /* Logistics */,
 				F093E03C1CD364B7004B751B /* MyOrder */,
 				F03648E01D0584B700E224CE /* MyOrderDetail */,
@@ -796,9 +802,10 @@
 				F008D5F81C9F92F800ADB5BE /* ViewController.h */,
 				F008D5F91C9F92F800ADB5BE /* ViewController.m */,
 				F008D5FB1C9F92F800ADB5BE /* Main.storyboard */,
+				F0F72EE51D1D0B880025A918 /* LaunchScreen.storyboard */,
 				F008D5FE1C9F92F800ADB5BE /* Assets.xcassets */,
-				F008D6001C9F92F800ADB5BE /* LaunchScreen.storyboard */,
 				F008D6031C9F92F800ADB5BE /* Info.plist */,
+				F0F72EE31D1D091B0025A918 /* Images.xcassets */,
 				F008D5F21C9F92F800ADB5BE /* Supporting Files */,
 			);
 			path = LejiaLife;
@@ -842,8 +849,6 @@
 		F008D60E1C9F961A00ADB5BE /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				F045C4761CC0F1C0004E7B21 /* SQLate */,
-				F0C48BD01CABCEA300AC9247 /* Goshopping */,
 				F008D6881CA38F5D00ADB5BE /* Furnishing */,
 				F008D6871CA38F5200ADB5BE /* kitchen */,
 				F008D6861CA38F4900ADB5BE /* Life */,
@@ -877,6 +882,7 @@
 		F008D6111C9F964900ADB5BE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F0F72EE91D1D11BD0025A918 /* Launchimage.png */,
 				F0F8AA921D07FB940084BE96 /* 同城切图 */,
 				F052EE681D017C8200960ED3 /* IOS切图 */,
 				F0A0482C1CE985D80072AA05 /* New Group */,
@@ -2065,6 +2071,7 @@
 				F0F8AAB11D07FB940084BE96 /* upward-triangle_city@2x.png in Resources */,
 				F008D6B21CA8FBAE00ADB5BE /* TestTableViewCell.xib in Resources */,
 				F045C4751CBF8E43004E7B21 /* title bgtwo.png in Resources */,
+				F0F72EEA1D1D11BD0025A918 /* Launchimage.png in Resources */,
 				F008D6DC1CA92C9C00ADB5BE /* title background@2x.png in Resources */,
 				F0F8AAAA1D07FB940084BE96 /* pay online_btn@2x.png in Resources */,
 				F045C4201CBDF52C004E7B21 /* choice_icon@3x.png in Resources */,
@@ -2074,7 +2081,6 @@
 				F052EE451CFEEA9200960ED3 /* qrcode_scan_bg_Green@2x.png in Resources */,
 				F008D6A81CA3B2BA00ADB5BE /* SnacksTableViewCell.xib in Resources */,
 				F0B3E54C1CFC43D300D3A09E /* icon@2x.png in Resources */,
-				F008D6021C9F92F800ADB5BE /* LaunchScreen.storyboard in Resources */,
 				F0B3E55A1CFD60C500D3A09E /* outdoors first_@2x.png in Resources */,
 				F045C46B1CBF7305004E7B21 /* hot spring@3x.png in Resources */,
 				F093E01F1CD1C4AE004B751B /* geographical position_icon@3x.png in Resources */,
@@ -2095,9 +2101,11 @@
 				F052EE711D017C8200960ED3 /* delete@2x.png in Resources */,
 				F008D6D31CA92C9C00ADB5BE /* carousel second_btn.png in Resources */,
 				F0F8AAAF1D07FB940084BE96 /* upward-triangle@2x.png in Resources */,
+				F0F72EE61D1D0B880025A918 /* LaunchScreen.storyboard in Resources */,
 				F0B3E5561CFD60C500D3A09E /* digital first_2x.png in Resources */,
 				F0501CD61CC767FE00B5D718 /* location@2x_icon.png in Resources */,
 				F045C4511CBF3800004E7B21 /* red_icon@3x.png in Resources */,
+				F0F72EE41D1D091B0025A918 /* Images.xcassets in Resources */,
 				F06447291CDB443F003D484C /* edit_icon@3x.png in Resources */,
 				F06596431CE45F64003FFA00 /* touxiang.png in Resources */,
 				F0F8AAB01D07FB940084BE96 /* upward-triangle@3x.png in Resources */,
@@ -2324,14 +2332,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		F008D6001C9F92F800ADB5BE /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F008D6011C9F92F800ADB5BE /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2352,7 +2352,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2371,7 +2372,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2396,7 +2397,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2409,7 +2411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2421,14 +2423,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3C30A41CD82BBA64E65B3D0 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Anshan Jifenke Network Technology Co., Ltd. (58T9BCNCGN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anshan Jifenke Network Technology Co., Ltd. (58T9BCNCGN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LejiaLife/LejiaLife.pch";
 				INFOPLIST_FILE = LejiaLife/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2440,9 +2443,10 @@
 					2/ZBarSDK,
 					"$(PROJECT_DIR)/LejiaLife/ZBarSDK",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jifenke.life;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "722bffa0-d8d3-4102-ad75-470251d7e714";
+				PROVISIONING_PROFILE = "54079278-6aba-4ed0-8629-5b35cab6528a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2451,14 +2455,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 50E74F91CF9E2091316E44B4 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Anshan Jifenke Network Technology Co., Ltd. (58T9BCNCGN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anshan Jifenke Network Technology Co., Ltd. (58T9BCNCGN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LejiaLife/LejiaLife.pch";
 				INFOPLIST_FILE = LejiaLife/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2470,9 +2475,10 @@
 					2/ZBarSDK,
 					"$(PROJECT_DIR)/LejiaLife/ZBarSDK",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jifenke.life;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "722bffa0-d8d3-4102-ad75-470251d7e714";
+				PROVISIONING_PROFILE = "54079278-6aba-4ed0-8629-5b35cab6528a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

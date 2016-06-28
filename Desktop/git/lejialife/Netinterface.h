@@ -8,13 +8,13 @@
 
 #ifndef Netinterface_h
 #define Netinterface_h
-
+#define BAIDUAK  @"sBrSreGsNg3DuB8NMm9uw1TrqA55t6QA"
 //友盟appkey
 #define YMAPPKEY @"575787c7e0f55ac8dc000452"
 //微信appid
 #define WXAPPID @"wx33a3dfdf616041a6"
 //微信api密匙
-#define WXSECRECT @"21jhkjqhkjqandke31231uidasGSsdcc"
+#define WXSECRECT @"fdade8409ebf3f22470764d1401739a3"
 //商户号
 #define WXMECRENT @"1328668401"
 
@@ -71,4 +71,6 @@
 #define PAYSUCCESS @"http://123.57.185.8/order/paySuccess"
 //确认收货
 #define ORDERCONFIRM @"http://123.57.185.8/order/orderConfirm"
+//微信登录
+#define WXLOGIN @"http://192.168.1.136:8080/user/wxLogin"
 #endif /* Netinterface_h */

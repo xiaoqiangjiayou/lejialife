@@ -111,67 +111,74 @@
     RegisterViewController *registerVC=[[RegisterViewController alloc]init];
     registerVC.titleStr=@"找回密码";
     registerVC.typeId=@"2";
+    self.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:registerVC animated:YES];
+    self.hidesBottomBarWhenPushed=NO;
     
 }
 -(void)Btn2Click{
-    NSString *phoneNumber=self.phoneNumberTextField.text;
-    NSString *passWord=self.passWordTextField.text;
-    NSString *token=@"123";
-    NSDictionary *dic=@{@"phoneNumber":phoneNumber,@"pwd":passWord,@"token":token};
-    [[NetDataEngin sharedInstance]requestHomeParamter:dic Atpage:nil WithURL:LOGIN success:^(id responsData) {
-        NSDictionary *responsDatadic=responsData;
-        NSInteger status=[responsDatadic[@"status"] integerValue];
-        if (status==200) {
-            NSLog(@"登录成功");
-            //用户数据
-            NSMutableDictionary *data=responsData[@"data"];
-            NSString *LoginToken=data[@"token"];
-            NSString *userOneBarCode=data[@"userOneBarCode"];
-            NSString *scoreA=[NSString stringWithFormat:@"%@",data[@"scoreA"] ];
-            NSString *scoreB=[NSString stringWithFormat:@"%@",data[@"scoreB"] ];
-            NSString *headImageUrlStr=[NSString stringWithFormat:@"%@",data[@"headImageUrl"]];
-            if ([headImageUrlStr isEqual:@"<null>"]) {
-                NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"touxiang"]);
-                [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"headImageUrl"];
-            }else{
-                NSString *headImageUrl=data[@"headImageUrl"];
-                NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:headImageUrl]];
-                [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"headImageUrl"];
-            }
-            //存储
-            [[NSUserDefaults standardUserDefaults] setObject:LoginToken forKey:@"LoginToken"];
-                [[NSUserDefaults standardUserDefaults] setObject:phoneNumber forKey:@"PhoneNumber"];
-            [[NSUserDefaults standardUserDefaults] setObject:userOneBarCode forKey:@"userOneBarCode"];
-            [[NSUserDefaults standardUserDefaults] setObject:scoreA forKey:@"scoreA"];
-            [[NSUserDefaults standardUserDefaults] setObject:scoreB forKey:@"scoreB"];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
-            if (self.LoginUpdateBlock) {
-                self.LoginUpdateBlock();
-            }
-            if (self.loginBlock) {
-                self.loginBlock();
-            }else if (self.notLoginBlock){
-                self.notLoginBlock();
-            }else{
-                HomeViewController *home=[[HomeViewController alloc]init];
-                [self.navigationController pushViewController:home animated:YES];
-            }
-            
+        if ([self validateMobile:self.phoneNumberTextField.text]==YES) {
+            NSString *phoneNumber=self.phoneNumberTextField.text;
+            NSString *passWord=self.passWordTextField.text;
+            NSString *token=@"123";
+            NSDictionary *dic=@{@"phoneNumber":phoneNumber,@"pwd":passWord,@"token":token};
+            [[NetDataEngin sharedInstance]requestHomeParamter:dic Atpage:nil WithURL:LOGIN success:^(id responsData) {
+                NSDictionary *responsDatadic=responsData;
+                NSInteger status=[responsDatadic[@"status"] integerValue];
+                if (status==200) {
+                    NSLog(@"登录成功");
+                    //用户数据
+                    NSMutableDictionary *data=responsData[@"data"];
+                    NSString *LoginToken=data[@"token"];
+                    NSString *userOneBarCode=data[@"userOneBarCode"];
+                    NSString *scoreA=[NSString stringWithFormat:@"%@",data[@"scoreA"] ];
+                    NSString *scoreB=[NSString stringWithFormat:@"%@",data[@"scoreB"] ];
+                    NSString *headImageUrlStr=[NSString stringWithFormat:@"%@",data[@"headImageUrl"]];
+                    if ([headImageUrlStr isEqual:@"<null>"]) {
+                        NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"touxiang"]);
+                        [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"headImageUrl"];
+                    }else{
+                        NSString *headImageUrl=data[@"headImageUrl"];
+                        NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:headImageUrl]];
+                        [[NSUserDefaults standardUserDefaults] setObject:imageData forKey:@"headImageUrl"];
+                    }
+                    //存储
+                    [[NSUserDefaults standardUserDefaults] setObject:LoginToken forKey:@"LoginToken"];
+                    [[NSUserDefaults standardUserDefaults] setObject:phoneNumber forKey:@"PhoneNumber"];
+                    [[NSUserDefaults standardUserDefaults] setObject:userOneBarCode forKey:@"userOneBarCode"];
+                    [[NSUserDefaults standardUserDefaults] setObject:scoreA forKey:@"scoreA"];
+                    [[NSUserDefaults standardUserDefaults] setObject:scoreB forKey:@"scoreB"];
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
+                    if (self.LoginUpdateBlock) {
+                        self.LoginUpdateBlock();
+                    }
+                    if (self.loginBlock) {
+                        self.loginBlock();
+                    }else if (self.notLoginBlock){
+                        self.notLoginBlock();
+                    }else{
+                        HomeViewController *home=[[HomeViewController alloc]init];
+                        [self.navigationController pushViewController:home animated:YES];
+                    }
+                    
+                }else{
+                    
+                    [MBHelper showHUDViewWithTextForFooterView:responsDatadic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
+                }
+            } failed:^(NSError *error) {
+                
+            }];
         }else{
-            
-            [MBHelper showHUDViewWithTextForFooterView:responsDatadic[@"msg"] withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
+            [MBHelper showHUDViewWithTextForFooterView:@"请输入正确的手机号码"withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
         }
-    } failed:^(NSError *error) {
-        
-    }];
-    
 }
 -(void)Btn3Click{
     RegisterViewController *registerVC=[[RegisterViewController alloc]init];
     registerVC.titleStr=@"注册";
     registerVC.typeId=@"1";
+    self.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:registerVC animated:YES];
+    self.hidesBottomBarWhenPushed=NO;
 }
 -(void)DisBtnClick:(UIButton*)sender{
     if (self.notLoginBlock) {
@@ -219,14 +226,7 @@
 //即将结束编辑
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     NSLog(@"ceshi");
-    if (textField==self.phoneNumberTextField) {
-        if ([self validateMobile:self.phoneNumberTextField.text]==YES) {
-            NSLog(@"***************************正确");
-        }else{
-         [MBHelper showHUDViewWithTextForFooterView:@"请输入正确的手机号码"withHUDColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.36]withDur:1.0];
-        }
-        
-    }
+    
     NSLog(@"textFieldShouldEndEditing");
     return YES;
 }

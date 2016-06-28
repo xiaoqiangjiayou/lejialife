@@ -23,7 +23,7 @@
 
 
 
-#define BAIDUAK  @"sBrSreGsNg3DuB8NMm9uw1TrqA55t6QA"
+
 //屏幕尺寸定义
 #define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
